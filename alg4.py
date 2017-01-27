@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sys import maxint
 
 maxSubArray = [31, -41, 59, 26, -53, 58, 97, -93, -23, 84]
