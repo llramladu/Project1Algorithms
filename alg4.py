@@ -18,13 +18,9 @@ def maxSubArraySum(a,size):
 			max_suffix = 0
 
 	return max_subArray
-<<<<<<< HEAD
+
 start = time.time()
 maxSum = maxSubArraySum(maxSubArray, 10)
 tTime = time.time() - start
 print maxSum
 print tTime
-=======
-
-print maxSubArraySum(maxSubArray, 10)
->>>>>>> db0187fcbfdb91c733b281e1acc802a84f5750a2
