@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 from sys import maxint
-from os import path;
+from os import path
 import time
+import os
 
 
 #Iterative n^3
@@ -94,6 +95,26 @@ def div_con( list, start, end ):
         return (la, lb, lc)
 
 
+def maxSubArraySum(a,size):
+    max_subArray = -maxint - 1
+        #sets starting max to smallest possible number
+    max_suffix = 0 #smallest end is set to 0 so it will be the first element of the array and then the largest subarray
+    start = 0
+    end = 0
+    for i in range(0,size):
+        max_suffix = max_suffix + a[i]
+        if(max_subArray < max_suffix): #if the suffix is larger then the subarray it becomes the subarray
+            max_subArray = max_suffix
+            end = i
+        
+        if (max_suffix < 0): #if the suffix becomes less than 0 it resets to being 0 so when the loop continues we will get the largest subarray
+            max_suffix = 0
+            start = i+1
+    if (start > end):
+        start = 0
+    return max_subArray, start, end
+
+
 importFile = "MSS_TestProblems.txt"
 outFile = "MSS_Results.txt"
 
@@ -115,6 +136,10 @@ if (path.isfile(importFile)):
     testFile.close()
 
 #open output file for writing
+
+if(path.isfile(outFile)):
+    os.remove(outFile)
+
 NewFile = open(outFile, 'w')
 
 
@@ -125,7 +150,6 @@ for i in range(len(testArray)):
     for x in range(len(testArray[i])):
         NewFile.write("%d " % testArray[i][x])
     NewFile.write('\n')
-    print "Enumeration"
     NewFile.write('\n')
     NewFile.write("Enumeration\n")
     total, start, end = enum(testArray[i])
@@ -135,7 +159,6 @@ for i in range(len(testArray)):
         k+=1
     NewFile.write('\n')
     NewFile.write("Total: %d\n" % total)
-    print "Better Enumeration"
     NewFile.write('\n')
     NewFile.write("Better Enumeration\n")
     total, start, end = better_enum(testArray[i])
@@ -145,7 +168,6 @@ for i in range(len(testArray)):
         k+=1
     NewFile.write('\n')
     NewFile.write("Total: %d\n" % total)
-    print "Divide and Conquer"
     NewFile.write('\n')
     NewFile.write("Divide and Conquer\n")
     total, start, end = div_con(testArray[i], 0, len(testArray[i])-1)
@@ -157,7 +179,13 @@ for i in range(len(testArray)):
     NewFile.write("Total: %d\n" % total)
     NewFile.write('\n')
     NewFile.write("Linear-Time\n")
-#linear time goes here
+    total, start, end = maxSubArraySum(testArray[i], len(testArray[i]))
+    k = start
+    while k <= end:
+        NewFile.write("%d " % testArray[i][k])
+        k+=1
+    NewFile.write('\n')
+    NewFile.write("Total: %d\n" % total)
     NewFile.write('\n')
     NewFile.write('\n')
 
