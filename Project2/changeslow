@@ -1,22 +1,39 @@
-def changeslow(amount, coins):
+#def changeslow(amount, coins):
 
 #if there is a k cent coin thent that one is the minimum
-	coins_size = 0
-	num_coins = 0
-	for i in coins:
-		coins_size = coins_size + 1
-		if amount == i:
-			num_coins = 1
-			print i
-			return num_coins
+#	coins_size = 0
+#	num_coins = 0
+#	for i in coins:
+#		coins_size = coins_size + 1
+#		if amount == i:
+#			num_coins = 1
+#			print i
+#			return num_coins
+#	
 	
-	
-	print  coins_size
-	return num_coins
+#	print  coins_size
+#	return num_coins
 
-	for i in coins:
-		if amount > i:
+#	for i in coins:
+#		if amount > i:
 			 
+def changeslow(amount, coins, coinsUsed): #recursive
+	sum = amount
+	num_coins = 0
+	coinCount = len(coins)
+	for i in coins:
+		coinCount-=1
+		if sum == i:
+			num_coins+=1
+			coinsUsed[coinCount]+=1
+			return num_coins, coinsUsed
+	for i in coins:
+		coinCount-=1
+		if i < sum: #coin value is less than amount
+			num_coins+=1
+			coinsUsed[coinCount]+=1
+			sum = sum-i
+			changeslow(sum, coins, coinsUsed)
 
 
-print changeslow(26, [1, 5, 10, 25, 50])
+print changeslow(15, [1, 5, 10, 25, 50], [0, 0, 0, 0, 0])
