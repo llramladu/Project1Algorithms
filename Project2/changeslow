@@ -20,13 +20,13 @@
 def changeslow(amount, coins, coinsUsed): #recursive
 	sum = amount
 	num_coins = 0
-	coinCount = len(coins)
+	coinCount = 0
 	for i in coins:
-		coinCount-=1
 		if sum == i:
 			num_coins+=1
 			coinsUsed[coinCount]+=1
 			return num_coins, coinsUsed
+		coinCount+=1
 	for i in coins:
 		coinCount-=1
 		if i < sum: #coin value is less than amount
@@ -36,4 +36,4 @@ def changeslow(amount, coins, coinsUsed): #recursive
 			changeslow(sum, coins, coinsUsed)
 
 
-print changeslow(15, [1, 5, 10, 25, 50], [0, 0, 0, 0, 0])
+print changeslow(25, [1, 5, 10, 25, 50], [0, 0, 0, 0, 0])
