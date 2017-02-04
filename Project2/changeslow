@@ -29,8 +29,8 @@ def changeslow(amount, coins, coinsUsed):
 			num_coins = sum(coinsUsed) #easy way to know the total number of coins
 			return num_coins, coinsUsed
 	#If the value isn't a value of a coin check to see what is the largest
-	#coin that the amount is larger than, subtract that, add the coin to the coinsUsed array
-	#then send the remainder back through
+	#coin that the amount is larger than, subtract that, add the coin to the 
+	#coinsUsed array, then send the difference back through
 	for i in reversed(coins):
 		coinCount-=1
 		if i < amount: #coin value is less than amount
